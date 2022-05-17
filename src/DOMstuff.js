@@ -1,5 +1,37 @@
 import { MainList, Task, TaskList } from "./constructors.js";
 
+function displayTaskList (tasklist, parent) {
+  let mainElement = document.createElement("div");
+    mainElement.classList.add("list-container");
+    mainElement.classList.add("show-opacity");
+    let domElement = document.createElement("div");
+    domElement.setAttribute("data-list", MainList.list.indexOf(tasklist));
+    domElement.classList.add("list");
+    let header = document.createElement("div");
+    header.classList.add("list-header");
+    header.innerText = tasklist.title;
+    let addBtn = document.createElement("button");
+    addBtn.classList.add("add-task-btn");
+    addBtn.innerText = "Add new task";
+    let deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "Delete list";
+    deleteBtn.classList.add("list-delete-btn");
+    domElement.append(header, addBtn, deleteBtn);
+    addBtn.addEventListener("click", () =>
+      displayTaskForm(domElement.getAttribute("data-list"))
+    );
+    deleteBtn.addEventListener("click", () => {
+      MainList.removeList(domElement.getAttribute("data-list"));
+      let elements = document.querySelector(".main-list").children; 
+      elements[domElement.getAttribute("data-list")].remove();
+    });
+    element.list.forEach((member) => {
+      displayTask(member, domElement);
+    });
+    mainElement.append(domElement);
+    parent.append(mainElement);
+}
+
 function displayMainList(mainlist, parent) {
   mainlist.list.forEach((element) => {
     let mainElement = document.createElement("div");
