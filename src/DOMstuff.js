@@ -3,6 +3,8 @@ import { MainList, Task, TaskList } from "./constructors.js";
 function displayMainList(mainlist, parent) {
   mainlist.list.forEach((element) => {
     let mainElement = document.createElement("div");
+    mainElement.classList.add("list-container");
+    mainElement.classList.add("show-opacity");
     let domElement = document.createElement("div");
     domElement.setAttribute("data-list", mainlist.list.indexOf(element));
     domElement.classList.add("list");
@@ -117,11 +119,23 @@ function displayTaskForm(data) {
       );
       MainList.list[data].addTask(newTask);
       displayTask(newTask, document.querySelector(`[data-list="${data}"]`));
-      popUp.remove();
+      popUp.classList.toggle("show-opacity");
+      setTimeout(() => {
+        popUp.remove();
+      }, "300");
     }
   });
 
-  exitIcon.addEventListener("click", () => popUp.remove());
+  exitIcon.addEventListener("click", () => {
+    popUp.classList.toggle("show-opacity");
+    setTimeout(() => {
+      popUp.remove();
+    }, "300");
+  });
+
+  setTimeout(() => {
+    popUp.classList.toggle("show-opacity");
+  }, "0");
 }
 
 function displayTask(task, parent) {
@@ -161,6 +175,9 @@ function displayTask(task, parent) {
   else description.innerText = "(No description...)";
 
   parent.append(taskElement);
+  setTimeout(() => {
+    taskElement.classList.toggle("show-opacity");
+  }, "300");
 }
 
 export { displayMainList, displayTask };

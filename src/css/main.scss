@@ -18,6 +18,10 @@ ul {
   margin: 0;
 }
 
+.show-opacity {
+  opacity: 1 !important;
+}
+
 .popup {
   position: fixed;
   height: 100%;
@@ -28,6 +32,8 @@ ul {
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 
   .task-form {
     position: relative;
@@ -203,6 +209,8 @@ ul {
     margin-left: 10px;
     margin-right: 10px;
     border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 
     .task-header {
       display: flex;
