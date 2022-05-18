@@ -1,5 +1,5 @@
 import { TaskList, MainList } from "./constructors.js";
-import { displayMainList } from "./DOMstuff.js";
+import { displayMainList, displayTaskList } from "./DOMstuff.js";
 import "./css/main.css";
 
 document.querySelector("#add-list-btn").addEventListener("click", () => {
@@ -7,11 +7,9 @@ document.querySelector("#add-list-btn").addEventListener("click", () => {
   let title = "";
   if (input.value === "") title = "Unnamed list";
   else title = input.value;
-  MainList.addList(new TaskList(`${title}`));
-  while (document.querySelector(".main-list").firstChild) {
-    document.querySelector(".main-list").firstChild.remove();
-  }
-  displayMainList(MainList, document.querySelector(".main-list"));
+  let newTaskList = new TaskList(`${title}`);
+  MainList.addList(newTaskList);
+  displayTaskList(newTaskList, document.querySelector(".main-list"));
 });
 
 if (localStorage.MainList)

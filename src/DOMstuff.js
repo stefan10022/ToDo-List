@@ -1,36 +1,63 @@
 import { MainList, Task, TaskList } from "./constructors.js";
 
+function displayTaskList(tasklist, parent) {
+  let mainElement = document.createElement("div");
+  mainElement.classList.add("list-container");
+  let domElement = document.createElement("div");
+  domElement.setAttribute("data-list", MainList.list.indexOf(tasklist));
+  mainElement.setAttribute(
+    "data-list-container",
+    MainList.list.indexOf(tasklist)
+  );
+  domElement.classList.add("list");
+  let header = document.createElement("div");
+  header.classList.add("list-header");
+  header.innerText = tasklist.title;
+  let addBtn = document.createElement("button");
+  addBtn.classList.add("add-task-btn");
+  addBtn.innerText = "Add new task";
+  let deleteBtn = document.createElement("button");
+  deleteBtn.innerText = "Delete list";
+  deleteBtn.classList.add("list-delete-btn");
+  domElement.append(header, addBtn, deleteBtn);
+  addBtn.addEventListener("click", () =>
+    displayTaskForm(domElement.getAttribute("data-list"))
+  );
+  deleteBtn.addEventListener("click", () => {
+    mainElement.classList.toggle("show-opacity");
+    setTimeout(() => {
+      mainElement.remove();
+      let elementList = document.querySelectorAll(".list-container");
+      elementList.forEach((element) => {
+        element.setAttribute(
+          "data-list-container",
+          Array.from(elementList).indexOf(element)
+        );
+      });
+      let elementList2 = document.querySelectorAll(".list");
+      elementList2.forEach((element) => {
+        element.setAttribute(
+          "data-list",
+          Array.from(elementList2).indexOf(element)
+        );
+      });
+    }, "300");
+    MainList.removeList(mainElement.getAttribute("data-list-container"));
+  });
+  tasklist.list.forEach((member) => {
+    displayTask(member, domElement);
+  });
+  mainElement.append(domElement);
+  parent.append(mainElement);
+
+  setTimeout(() => {
+    mainElement.classList.toggle("show-opacity");
+  }, "0");
+}
+
 function displayMainList(mainlist, parent) {
   mainlist.list.forEach((element) => {
-    let mainElement = document.createElement("div");
-    let domElement = document.createElement("div");
-    domElement.setAttribute("data-list", mainlist.list.indexOf(element));
-    domElement.classList.add("list");
-    let header = document.createElement("div");
-    header.classList.add("list-header");
-    header.innerText = element.title;
-    let addBtn = document.createElement("button");
-    addBtn.classList.add("add-task-btn");
-    addBtn.innerText = "Add new task";
-    let deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "Delete list";
-    deleteBtn.classList.add("list-delete-btn");
-    domElement.append(header, addBtn, deleteBtn);
-    addBtn.addEventListener("click", () =>
-      displayTaskForm(domElement.getAttribute("data-list"))
-    );
-    deleteBtn.addEventListener("click", () => {
-      MainList.removeList(domElement.getAttribute("data-list"));
-      while (document.querySelector(".main-list").firstChild) {
-        document.querySelector(".main-list").firstChild.remove();
-      }
-      displayMainList(MainList, document.querySelector(".main-list"));
-    });
-    element.list.forEach((member) => {
-      displayTask(member, domElement);
-    });
-    mainElement.append(domElement);
-    parent.append(mainElement);
+    displayTaskList(element, parent);
   });
 }
 
@@ -117,11 +144,23 @@ function displayTaskForm(data) {
       );
       MainList.list[data].addTask(newTask);
       displayTask(newTask, document.querySelector(`[data-list="${data}"]`));
-      popUp.remove();
+      popUp.classList.toggle("show-opacity");
+      setTimeout(() => {
+        popUp.remove();
+      }, "300");
     }
   });
 
-  exitIcon.addEventListener("click", () => popUp.remove());
+  exitIcon.addEventListener("click", () => {
+    popUp.classList.toggle("show-opacity");
+    setTimeout(() => {
+      popUp.remove();
+    }, "300");
+  });
+
+  setTimeout(() => {
+    popUp.classList.toggle("show-opacity");
+  }, "0");
 }
 
 function displayTask(task, parent) {
@@ -161,6 +200,9 @@ function displayTask(task, parent) {
   else description.innerText = "(No description...)";
 
   parent.append(taskElement);
+  setTimeout(() => {
+    taskElement.classList.toggle("show-opacity");
+  }, "300");
 }
 
-export { displayMainList, displayTask };
+export { displayMainList, displayTask, displayTaskList };
