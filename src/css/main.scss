@@ -100,6 +100,9 @@ ul {
   margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   min-height: 100vh;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
   #add-list-btn {
     background-color: #007fff;
@@ -124,6 +127,12 @@ ul {
       font-size: 1.3rem;
       padding: 8px;
       margin-right: 10px;
+      width: 30%;
+      @media (max-width: 768px) {
+        width: 50%;
+        font-size: 1.1rem;
+        padding: 5px;
+      }
     }
   }
 
@@ -148,6 +157,9 @@ ul {
       border-radius: 5px;
       &:not(:last-child) {
         margin-bottom: 10px;
+      }
+      @media (max-width: 768px) {
+        flex-basis: 100%;
       }
     }
 
@@ -224,6 +236,9 @@ ul {
       color: black;
       cursor: pointer;
       font-size: 1.1rem;
+      @media (max-width: 768px) {
+        font-size: 0.8rem;
+      }
 
       .title-and-icon {
         display: flex;
@@ -235,6 +250,9 @@ ul {
       text-align: start;
       padding-left: 30px;
       margin-top: 5px;
+      @media (max-width: 768px) {
+        font-size: 0.7rem;
+      }
     }
 
     i {
