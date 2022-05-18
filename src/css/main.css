@@ -139,6 +139,10 @@ ul {
 .wrap .main-list > *:not(:last-child) {
   margin-bottom: 10px;
 }
+.wrap .main-list .list-container {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
 .wrap .main-list .list {
   margin-right: 10px;
   min-height: 350px;

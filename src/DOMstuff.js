@@ -3,10 +3,12 @@ import { MainList, Task, TaskList } from "./constructors.js";
 function displayTaskList(tasklist, parent) {
   let mainElement = document.createElement("div");
   mainElement.classList.add("list-container");
-  mainElement.classList.add("show-opacity");
   let domElement = document.createElement("div");
   domElement.setAttribute("data-list", MainList.list.indexOf(tasklist));
-  mainElement.setAttribute("data-list-container", MainList.list.indexOf(tasklist));
+  mainElement.setAttribute(
+    "data-list-container",
+    MainList.list.indexOf(tasklist)
+  );
   domElement.classList.add("list");
   let header = document.createElement("div");
   header.classList.add("list-header");
@@ -22,14 +24,35 @@ function displayTaskList(tasklist, parent) {
     displayTaskForm(domElement.getAttribute("data-list"))
   );
   deleteBtn.addEventListener("click", () => {
-    MainList.removeList(domElement.getAttribute("data-list"));
-    document.querySelector(`[data-list-container="${domElement.getAttribute("data-list")}"]`).remove();
+    mainElement.classList.toggle("show-opacity");
+    setTimeout(() => {
+      mainElement.remove();
+      let elementList = document.querySelectorAll(".list-container");
+      elementList.forEach((element) => {
+        element.setAttribute(
+          "data-list-container",
+          Array.from(elementList).indexOf(element)
+        );
+      });
+      let elementList2 = document.querySelectorAll(".list");
+      elementList2.forEach((element) => {
+        element.setAttribute(
+          "data-list",
+          Array.from(elementList2).indexOf(element)
+        );
+      });
+    }, "300");
+    MainList.removeList(mainElement.getAttribute("data-list-container"));
   });
   tasklist.list.forEach((member) => {
     displayTask(member, domElement);
   });
   mainElement.append(domElement);
   parent.append(mainElement);
+
+  setTimeout(() => {
+    mainElement.classList.toggle("show-opacity");
+  }, "0");
 }
 
 function displayMainList(mainlist, parent) {
