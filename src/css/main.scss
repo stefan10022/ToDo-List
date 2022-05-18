@@ -43,6 +43,11 @@ ul {
     border-radius: 5px;
     font-size: 1.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+      padding: 10px;
+      flex-basis: 95%;
+    }
     & > *:not(:last-child) {
       margin-bottom: 10px;
       display: flex;
@@ -51,6 +56,9 @@ ul {
     input {
       font-size: 1.3rem;
       border-radius: 5px;
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
     }
 
     label {
@@ -60,6 +68,9 @@ ul {
     select {
       font-size: 1.3rem;
       border-radius: 5px;
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
     }
 
     textarea {
@@ -67,6 +78,9 @@ ul {
       min-height: 75px;
       flex-basis: 60%;
       font-size: 1.1rem;
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
     }
 
     .exit-icon {

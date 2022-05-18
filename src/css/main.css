@@ -44,6 +44,13 @@ ul {
   font-size: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+@media (max-width: 768px) {
+  .popup .task-form {
+    font-size: 1.2rem;
+    padding: 10px;
+    flex-basis: 95%;
+  }
+}
 .popup .task-form > *:not(:last-child) {
   margin-bottom: 10px;
   display: flex;
@@ -52,6 +59,11 @@ ul {
   font-size: 1.3rem;
   border-radius: 5px;
 }
+@media (max-width: 768px) {
+  .popup .task-form input {
+    font-size: 1rem;
+  }
+}
 .popup .task-form label {
   margin-right: 10px;
 }
@@ -59,11 +71,21 @@ ul {
   font-size: 1.3rem;
   border-radius: 5px;
 }
+@media (max-width: 768px) {
+  .popup .task-form select {
+    font-size: 1rem;
+  }
+}
 .popup .task-form textarea {
   border-radius: 5px;
   min-height: 75px;
   flex-basis: 60%;
   font-size: 1.1rem;
+}
+@media (max-width: 768px) {
+  .popup .task-form textarea {
+    font-size: 1rem;
+  }
 }
 .popup .task-form .exit-icon {
   position: absolute;
